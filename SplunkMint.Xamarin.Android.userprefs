@@ -1,0 +1,13 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.MonoForAndroid_19" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="SplunkXamarinClient/MainActivity.cs">
+    <Files>
+      <File FileName="SplunkXamarinClient/MainActivity.cs" Line="2" Column="2" />
+      <File FileName="SplunkXamarinClient/Properties/AndroidManifest.xml" Line="12" Column="12" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

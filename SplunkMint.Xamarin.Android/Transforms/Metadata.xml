@@ -1,0 +1,45 @@
+﻿<metadata>
+
+  <attr path="/api/package[@name='com.splunk.mint']/class[@name='BaseDTO']"
+    name="visibility">public</attr>
+  <attr path="/api/package[@name='com.splunk.mint']/interface[@name='InterfaceDataType']"
+    name="visibility">public</attr>
+  <attr path="/api/package[@name='com.splunk.mint']/class[@name='EnumActionType']"
+    name="visibility">public</attr>
+  <attr path="/api/package[@name='com.splunk.mint']/class[@name='EnumStateStatus']"
+    name="visibility">public</attr>
+  <attr path="/api/package[@name='com.splunk.mint']/class[@name='BreadcrumbsLimited']"
+    name="visibility">public</attr>
+  <attr path="/api/package[@name='com.splunk.mint']/class[@name='TransactionsDatabase']"
+    name="visibility">public</attr>
+ 
+ 
+  <attr path="/api/package[@name='com.splunk.mint.network.http']/class[@name='HTTPSURLStreamHandler']/method[@name='getDefaultPort' and count(parameter)=0]"
+    name="visibility">protected</attr>
+  <attr path="/api/package[@name='com.splunk.mint.network.http']/class[@name='HTTPURLStreamHandler']/method[@name='getDefaultPort' and count(parameter)=0]"
+    name="visibility">protected</attr>
+  <attr path="/api/package[@name='com.splunk.mint.network.http']/class[@name='URLStreamHandlerBase']/method[@name='getDefaultPort' and count(parameter)=0]"
+    name="visibility">protected</attr>
+ 
+ 
+ 
+  <attr path="/api/package[@name='com.splunk.mint.network']/class[@name='Counter']/method[@name='getValue' and count(parameter)=0]"
+    name="managedName">GetRawValue2</attr>
+  <attr path="/api/package[@name='com.splunk.mint.network']/class[@name='Counter']/method[@name='getValue' and count(parameter)=0]"
+    name="visibility">protected</attr>
+ 
+  <attr path="/api/package[@name='com.splunk.mint.network']/class[@name='Timer']/method[@name='getValue' and count(parameter)=0]"
+    name="managedName">GetRawValue2</attr>
+  <attr path="/api/package[@name='com.splunk.mint.network']/class[@name='Timer']/method[@name='getValue' and count(parameter)=0]"
+    name="visibility">protected</attr>
+ 
+ 
+ 
+  <attr path="/api/package[@name='com.splunk.mint']" name="managedName">Splunk.Mint</attr>
+  <attr path="/api/package[@name='com.splunk.mint.network']" name="managedName">Splunk.Mint.Network</attr>
+  <attr path="/api/package[@name='com.splunk.mint.network.http']" name="managedName">Splunk.Mint.Network.Http</attr>
+  <attr path="/api/package[@name='com.splunk.mint.network.io']" name="managedName">Splunk.Mint.Network.IO</attr>
+  <attr path="/api/package[@name='com.splunk.mint.network.socket']" name="managedName">Splunk.Mint.Network.Socket</attr>
+  <attr path="/api/package[@name='com.splunk.mint.network.util']" name="managedName">Splunk.Mint.Network.Util</attr>
+ 
+</metadata>
