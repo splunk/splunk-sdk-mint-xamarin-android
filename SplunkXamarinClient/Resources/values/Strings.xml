@@ -1,5 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="hello">Hello World, Click Me!</string>
 	<string name="app_name">SplunkXamarinClient</string>
+	<string name="nullreference">NullReferenceException!</string>
+	<string name="startSessionButtonText">Start Session</string>
+	<string name="closeSessionButtonText">Close Session</string>
+	<string name="flushButtonText">Flush</string>
+	<string name="startTransactionButtonText">Start Transaction</string>
+	<string name="stopTransactionButtonText">Stop Transaction</string>
+	<string name="cancelTransactionButtonText">Cancel Transaction</string>
+	<string name="logEventLogLevelButtonText">Log Event with Log level</string>
+	<string name="logEventButtonText">Log Event</string>
+	<string name="handleExceptionArgumentButtonText">Handle Exception Argument</string>
+	<string name="handleExceptionNullButtonText">Handle Exception Null</string>
 </resources>
