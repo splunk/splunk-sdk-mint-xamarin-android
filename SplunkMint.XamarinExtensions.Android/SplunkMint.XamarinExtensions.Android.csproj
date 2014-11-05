@@ -3,14 +3,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{10368E6C-D01B-4462-8E8B-01FC667A7035};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <ProjectGuid>{6C3B7576-0699-4E19-844B-B8FE6BF05800}</ProjectGuid>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <ProjectGuid>{C16D9F2A-4800-4062-8DDD-DD9DB4087093}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>SplunkMint.Xamarin.Android</RootNamespace>
-    <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
+    <RootNamespace>SplunkMint.XamarinExtensions.Android</RootNamespace>
     <MonoAndroidAssetsPrefix>Assets</MonoAndroidAssetsPrefix>
+    <MonoAndroidResourcePrefix>Resources</MonoAndroidResourcePrefix>
+    <AndroidResgenClass>Resource</AndroidResgenClass>
+    <AndroidResgenFile>Resources\Resource.designer.cs</AndroidResgenFile>
     <AndroidUseLatestPlatformSdk>True</AndroidUseLatestPlatformSdk>
-    <AssemblyName>SplunkMint.Xamarin.Android</AssemblyName>
+    <AssemblyName>SplunkMint.XamarinExtensions.Android</AssemblyName>
     <TargetFrameworkVersion>v4.4</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -38,23 +40,25 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
+    <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Additions\Fixups.cs" />
-    <Compile Include="Additions\Extensions.cs" />
+    <Compile Include="Resources\Resource.designer.cs" />
+    <Compile Include="XamarinExceptionHandler.cs" />
+    <Compile Include="MintHttpHandler.cs" />
+    <Compile Include="Extensions.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Additions\AboutAdditions.txt" />
-    <None Include="Jars\AboutJars.txt" />
+    <None Include="Resources\AboutResources.txt" />
   </ItemGroup>
   <ItemGroup>
-    <TransformFile Include="Transforms\EnumFields.xml" />
-    <TransformFile Include="Transforms\EnumMethods.xml" />
-    <TransformFile Include="Transforms\Metadata.xml" />
+    <AndroidResource Include="Resources\values\Strings.xml" />
   </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath)\Novell\Xamarin.Android.Bindings.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>
-    <EmbeddedJar Include="Jars\splunk-mint-4.0.4.jar" />
+    <ProjectReference Include="..\SplunkMint.Xamarin.Android\SplunkMint.Xamarin.Android.csproj">
+      <Project>{6C3B7576-0699-4E19-844B-B8FE6BF05800}</Project>
+      <Name>SplunkMint.Xamarin.Android</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>

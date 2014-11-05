@@ -12,4 +12,6 @@
 	<string name="logEventButtonText">Log Event</string>
 	<string name="handleExceptionArgumentButtonText">Handle Exception Argument</string>
 	<string name="handleExceptionNullButtonText">Handle Exception Null</string>
+	<string name="httpClientButtonText">HttpClient REST POST</string>
+	<string name="modernHttpClientButtonText">ModernHttpClient REST POST</string>
 </resources>

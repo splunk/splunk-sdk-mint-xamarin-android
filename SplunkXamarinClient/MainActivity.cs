@@ -8,6 +8,11 @@ using Android.Widget;
 using Android.OS;
 using Splunk.Mint;
 using Android.Util;
+using System.Net.Http;
+using SplunkMint.XamarinExtensions.Android;
+using System.Net.Http.Headers;
+using ModernHttpClient;
+using System.Net;
 
 namespace SplunkXamarinClient
 {
@@ -22,8 +27,7 @@ namespace SplunkXamarinClient
 			base.OnCreate (bundle);
 
 			Mint.SetMintCallback(this);
-			Mint.InitAndStartSession(Application.Context, "3520f5c9");
-			XamarinExceptionHandler.InitXamarinExceptionHandler ();
+			MintXamarin.InitAndStartXamarinSession(Application.Context, "3520f5c9");
 			Mint.EnableDebug ();
 
 			// Set our view from the "main" layout resource
@@ -42,6 +46,8 @@ namespace SplunkXamarinClient
 			Button startTransactionButton = FindViewById<Button> (Resource.Id.startTransactionButton);
 			Button stopTransactionButton = FindViewById<Button> (Resource.Id.stopTransactionButton);
 			Button cancelTransactionButton = FindViewById<Button> (Resource.Id.cancelTransactionButton);
+			Button httpClientButton = FindViewById<Button> (Resource.Id.httpClientButton);
+			Button modernHttpClientButton = FindViewById<Button> (Resource.Id.modernHttpClientButton);
 			
 			nullReferenceButton.Click += NullReferenceClick;
 			startSessionButton.Click += StartSessionClick;
@@ -54,6 +60,8 @@ namespace SplunkXamarinClient
 			startTransactionButton.Click += TransactionStartClick;
 			stopTransactionButton.Click += TransactionStopClick;
 			cancelTransactionButton.Click += TransactionCancelClick;
+			httpClientButton.Click += HttpClientRestPost;
+			modernHttpClientButton.Click += ModernHttpClientRestPost;
 		}
 
 		void HandleNullReferenceClick(object sender, EventArgs args)
@@ -141,6 +149,50 @@ namespace SplunkXamarinClient
 		public void NetSenderResponse (NetSenderResponse p0)
 		{
 			Log.Debug (Tag, string.Format("Net Sender Response: {0}", p0.ToString ()));
+		}
+
+		private const string URLRequestBin = "http://requestb.in/1jb4mq01";
+
+		async void HttpClientRestPost (object sender, EventArgs args)
+		{
+			try
+			{
+				using (HttpClientHandler handler = new HttpClientHandler())
+				{
+					MintHttpHandler interceptionHandler = new MintHttpHandler(handler);
+					HttpClient httpClient = new HttpClient(interceptionHandler);
+					StringContent dataStringContent = new StringContent("Sample Text Data for HttpClient!");
+					dataStringContent.Headers.ContentType = new MediaTypeHeaderValue("text/plain");
+					HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, URLRequestBin)
+					{
+						Content = dataStringContent
+					};
+					HttpResponseMessage response = await httpClient.SendAsync(request).ConfigureAwait(false);
+					string responseString = await response.Content.ReadAsStringAsync();
+					if (response.StatusCode == HttpStatusCode.OK &&
+						response.IsSuccessStatusCode)
+					{
+						Log.Debug(Tag, "HttpClient Succeed!");
+					}
+					else
+					{
+						Log.Debug(Tag, "HttpClient Failed!");
+					}
+				}
+			}
+			catch(Exception ex) {
+				Log.Debug(Tag, string.Format("Exception from HttpClient request: {0}", ex));
+			}
+		}
+
+		async void ModernHttpClientRestPost (object sender, EventArgs e)
+		{
+			// Use SplunkInterceptionHttpHandler to intercept your networking REST calls
+			MintHttpHandler interceptionHandler = new MintHttpHandler(new NativeMessageHandler());
+			HttpClient httpClient = new HttpClient (interceptionHandler);
+			HttpResponseMessage responseMessage = await httpClient.PostAsync(URLRequestBin, new StringContent("Just A Test"));
+
+			Log.Debug (Tag, responseMessage.ToString ());
 		}
 	}
 }

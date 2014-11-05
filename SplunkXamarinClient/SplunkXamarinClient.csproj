@@ -42,6 +42,13 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="ModernHttpClient">
+      <HintPath>..\packages\modernhttpclient.2.1.2\lib\MonoAndroid\ModernHttpClient.dll</HintPath>
+    </Reference>
+    <Reference Include="OkHttp">
+      <HintPath>..\packages\modernhttpclient.2.1.2\lib\MonoAndroid\OkHttp.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
@@ -52,6 +59,7 @@
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
     <None Include="Properties\AndroidManifest.xml" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml" />
@@ -63,6 +71,10 @@
     <ProjectReference Include="..\SplunkMint.Xamarin.Android\SplunkMint.Xamarin.Android.csproj">
       <Project>{6C3B7576-0699-4E19-844B-B8FE6BF05800}</Project>
       <Name>SplunkMint.Xamarin.Android</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SplunkMint.XamarinExtensions.Android\SplunkMint.XamarinExtensions.Android.csproj">
+      <Project>{C16D9F2A-4800-4062-8DDD-DD9DB4087093}</Project>
+      <Name>SplunkMint.XamarinExtensions.Android</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>
