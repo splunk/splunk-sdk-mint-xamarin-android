@@ -1,16 +1,17 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.LGV5009f94ecad" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="SplunkXamarinClient/MainActivity.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="SplunkMint.XamarinExtensions.Android/Helper.cs">
     <Files>
       <File FileName="SplunkXamarinClient/MainActivity.cs" Line="4" Column="4" />
-      <File FileName="SplunkMint.Xamarin.Android/Additions/Extensions.cs" Line="25" Column="25" />
-      <File FileName="SplunkMint.XamarinExtensions.Android/XamarinExceptionHandler.cs" Line="4" Column="4" />
-      <File FileName="SplunkMint.XamarinExtensions.Android/MintHttpHandler.cs" Line="4" Column="4" />
-      <File FileName="SplunkMint.XamarinExtensions.Android/Extensions.cs" Line="10" Column="10" />
+      <File FileName="SplunkMint.XamarinExtensions.Android/XamarinExceptionHandler.cs" Line="1" Column="1" />
+      <File FileName="SplunkMint.XamarinExtensions.Android/MintHttpHandler.cs" Line="51" Column="51" />
+      <File FileName="SplunkMint.XamarinExtensions.Android/Helper.cs" Line="6" Column="6" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/gtaskos/Documents/Projects/Splunk/SplunkMint.Xamarin.Android/SplunkMint.XamarinExtensions.Android/Helper.cs" line="21" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.ItemProperties.SplunkXamarinClient MonoForAntroid.PreferredDevice="Nexus 4" />

@@ -53,4 +53,3 @@ namespace SplunkMint.XamarinExtensions.Android
 		#endregion
 	}
 }
-

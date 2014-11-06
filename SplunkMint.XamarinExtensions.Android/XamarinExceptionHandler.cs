@@ -13,10 +13,6 @@ namespace Splunk.Mint
 		{
 			XamarinExceptionHandler.InitXamarinExceptionHandler ();
 			Mint.InitAndStartSession (context, apiKey);
-
-//			logNetworkRequest(final String url, final String protocol, final long startT, final long endT,
-//				final int statusCode, final long requestLength, final long responseLength, final String exception)
-//			Network.NetLogManager.Instance.LogNetworkRequest ();
 		}
 
 		private static class XamarinExceptionHandler

@@ -8,7 +8,7 @@ using Splunk.Mint.Network;
 
 namespace SplunkMint.XamarinExtensions.Android
 {
-	#region Splunk Network Interception Http Handler
+	#region Splunk Network Xamarin Android Interception HTTP Delegating Handler
 
 	/// <summary>
 	/// An interception handler to use with your HttpClient REST client implementation.
@@ -18,7 +18,7 @@ namespace SplunkMint.XamarinExtensions.Android
 		/// <summary>
 		/// Default constructor.
 		/// </summary>
-		/// <param name="messageHandler">The HttpClientHandler.</param>
+		/// <param name="messageHandler">The HttpClientDelegatingHandler.</param>
 		public MintHttpHandler(HttpMessageHandler messageHandler)
 			: base(messageHandler)
 		{
@@ -27,22 +27,10 @@ namespace SplunkMint.XamarinExtensions.Android
 		protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
 		{
 			byte[] contentBytes = await request.Content.ReadAsByteArrayAsync();
-
-			//			foreach (KeyValuePair<string, IEnumerable<string>> requestHeader in request.Headers)
-			//			{
-			//				networkDataFixture.Headers.Add(requestHeader.Key, requestHeader.Value.FirstOrDefault());
-			//			}
-
-			Debug.WriteLine(string.Format("Intercepting call!"));
-			Debug.WriteLine(string.Format("URL: {0}", request.RequestUri));
-			Debug.WriteLine(string.Format("HTTP Method: {0}", request.Method));
-			byte[] sendBytes = await request.Content.ReadAsByteArrayAsync();
-			Debug.WriteLine(string.Format("Bytes to send: {0}", sendBytes.Length));
-			Stopwatch stopwatch = new Stopwatch();
 			long startTime = Extensions.GetCurrentUnixTimestampMillis ();
-			stopwatch.Start();
 			string exceptionCaughtMessage = null;
 			HttpResponseMessage responseMessage = null;
+
 			try
 			{
 				responseMessage = await base.SendAsync(request, cancellationToken);
@@ -51,19 +39,10 @@ namespace SplunkMint.XamarinExtensions.Android
 				exceptionCaughtMessage = ex.Message;
 			}
 
-			stopwatch.Stop();
 			long endTime = Extensions.GetCurrentUnixTimestampMillis (); 
-
-			//			networkDataFixture.StatusCode = (int)responseMessage.StatusCode;
-			//			networkDataFixture.Failed = !responseMessage.IsSuccessStatusCode;
-			//			networkDataFixture.Duration = stopwatch.ElapsedMilliseconds;
-
-			Debug.WriteLine(string.Format("Response Code: {0}", responseMessage.StatusCode));
 			byte[] receivedBytes = await responseMessage.Content.ReadAsByteArrayAsync();
-			Debug.WriteLine(string.Format("Latency time in millis: {0}", stopwatch.ElapsedMilliseconds));
-			Debug.WriteLine(string.Format("Bytes received: {0}", receivedBytes.Length));
 
-			await SaveNetworkActionAsync (request.RequestUri.AbsolutePath, request.RequestUri.Scheme, startTime, endTime, (int)responseMessage.StatusCode,
+			await SaveNetworkActionAsync (request.RequestUri.ToString(), request.RequestUri.Scheme, startTime, endTime, (int)responseMessage.StatusCode,
 				contentBytes.Length, receivedBytes.Length, exceptionCaughtMessage);
 
 			return responseMessage;
