@@ -16,16 +16,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/linearLayout1">
         <Button
-            android:text="@string/startSessionButtonText"
-            android:id="@+id/startSessionButton"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
-        <Button
-            android:text="@string/closeSessionButtonText"
-            android:id="@+id/closeSessionButton"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
-        <Button
             android:text="@string/flushButtonText"
             android:id="@+id/flushButton"
             android:layout_width="wrap_content"

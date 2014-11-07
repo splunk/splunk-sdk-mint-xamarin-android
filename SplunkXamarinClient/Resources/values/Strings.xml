@@ -2,8 +2,6 @@
 <resources>
 	<string name="app_name">SplunkXamarinClient</string>
 	<string name="nullreference">NullReferenceException!</string>
-	<string name="startSessionButtonText">Start Session</string>
-	<string name="closeSessionButtonText">Close Session</string>
 	<string name="flushButtonText">Flush</string>
 	<string name="startTransactionButtonText">Start Transaction</string>
 	<string name="stopTransactionButtonText">Stop Transaction</string>

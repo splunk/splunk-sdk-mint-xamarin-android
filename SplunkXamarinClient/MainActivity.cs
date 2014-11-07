@@ -13,6 +13,7 @@ using SplunkMint.XamarinExtensions.Android;
 using System.Net.Http.Headers;
 using ModernHttpClient;
 using System.Net;
+using System.Collections.Generic;
 
 namespace SplunkXamarinClient
 {
@@ -27,8 +28,43 @@ namespace SplunkXamarinClient
 			base.OnCreate (bundle);
 
 			Mint.SetMintCallback(this);
-			MintXamarin.InitAndStartXamarinSession(Application.Context, "3520f5c9");
 			Mint.EnableDebug ();
+			Mint.SetUserIdentifier ("gtaskos@splunk.com");
+//			Mint.DisableNetworkMonitoring ();
+			Mint.AddURLToBlackList("www.facebook.com");
+			Mint.EnableLogging(true);
+
+			// Log the last 100 messages
+			Mint.SetLogging(100);
+
+			// Log all messages with priority level "warning" and higher, on all tags
+			Mint.SetLogging("*:W");
+
+			// Log the latest 100 messages with priority level "warning" and higher,
+			// on all tags
+			Mint.SetLogging(100, "*:W");
+
+			// Log all messages from the ActivityManager at priority "Info" or above,
+			// all log messages with tag "MyApp", with priority "Debug" or above:
+			Mint.SetLogging(400, "ActivityManager:I MyApp:D *:S");
+
+			MintXamarin.InitAndStartXamarinSession(Application.Context, "3520f5c9");
+
+			Mint.AddExtraData ("ExtraKey1", "ExtraValue1");
+
+			Mint.ClearExtraData ();
+
+			IDictionary<string, string> dictionaryMap = new Dictionary<string, string> ();
+			dictionaryMap.Add ("ExtraDictionaryKey1", "ExtraDictionaryValue1");
+			dictionaryMap.Add ("ExtraDictionaryKey2", "ExtraDictionaryValue2");
+
+			Mint.AddExtraDataMap (dictionaryMap);
+
+			IDictionary<string, string> globalExtras = Mint.ExtraData;
+
+			Mint.RemoveExtraData ("ExtraKey1");
+
+			Mint.LeaveBreadcrumb ("MainActivity:Oncreate");
 
 			// Set our view from the "main" layout resource
 			SetContentView (Resource.Layout.Main);
@@ -36,8 +72,6 @@ namespace SplunkXamarinClient
 			// Get our button from the layout resource,
 			// and attach an event to it
 			Button nullReferenceButton = FindViewById<Button> (Resource.Id.myButton);
-			Button startSessionButton = FindViewById<Button> (Resource.Id.startSessionButton);
-			Button closeSessionButton = FindViewById<Button> (Resource.Id.closeSessionButton);
 			Button flushButton = FindViewById<Button> (Resource.Id.flushButton);
 			Button logEventLogLevelButton = FindViewById<Button> (Resource.Id.logEventLogLevelButton);
 			Button logEventButton = FindViewById<Button> (Resource.Id.logEventButton);
@@ -50,8 +84,6 @@ namespace SplunkXamarinClient
 			Button modernHttpClientButton = FindViewById<Button> (Resource.Id.modernHttpClientButton);
 			
 			nullReferenceButton.Click += NullReferenceClick;
-			startSessionButton.Click += StartSessionClick;
-			closeSessionButton.Click += CloseSessionClick;
 			flushButton.Click += FlushClick;
 			logEventLogLevelButton.Click += LogEventLogLevelClick;
 			logEventButton.Click += LogEventClick;
@@ -62,6 +94,18 @@ namespace SplunkXamarinClient
 			cancelTransactionButton.Click += TransactionCancelClick;
 			httpClientButton.Click += HttpClientRestPost;
 			modernHttpClientButton.Click += ModernHttpClientRestPost;
+		}
+
+		protected override void OnResume ()
+		{
+			base.OnResume ();
+			Mint.StartSession (this);
+		}
+
+		protected override void OnStop ()
+		{
+			base.OnStop ();
+			Mint.CloseSession (this);
 		}
 
 		void HandleNullReferenceClick(object sender, EventArgs args)
@@ -86,7 +130,21 @@ namespace SplunkXamarinClient
 				throw new ArgumentException("A Xamarin Android ArgumentException for testing purposes!");
 			}
 			catch (Exception ex) {
-				Mint.LogException (new Java.Lang.Exception(Java.Lang.Exception.FromException(ex)));
+				Mint.LogExceptionMessage ("HandledKey1", "HandledValue1", ex.ToJavaException());
+			}
+		}
+
+		void HandleApplicationExceptionClick(object sender, EventArgs args)
+		{
+			try
+			{
+				throw new ApplicationException("A Xamarin Android ArgumentException for testing purposes!");
+			}
+			catch (Exception ex) {
+				IDictionary<string, string> dictionaryMap = new Dictionary<string, string> ();
+				dictionaryMap.Add ("DictionaryKey1", "DictionaryValue1");
+				dictionaryMap.Add ("DictionaryKey2", "DictionaryValue2");
+				Mint.LogExceptionMap (dictionaryMap, ex.ToJavaException());
 			}
 		}
 
@@ -94,16 +152,6 @@ namespace SplunkXamarinClient
 		{
 			string a = null;
 			a.ToString();
-		}
-
-		void StartSessionClick(object sender, EventArgs args)
-		{
-			Mint.StartSession (this);
-		}
-
-		void CloseSessionClick(object sender, EventArgs args)
-		{
-			Mint.CloseSession (this);
 		}
 
 		void FlushClick(object sender, EventArgs args)
@@ -143,7 +191,7 @@ namespace SplunkXamarinClient
 
 		public void LastBreath (Java.Lang.Exception p0)
 		{
-			//throw new NotImplementedException ();
+
 		}
 
 		public void NetSenderResponse (NetSenderResponse p0)
@@ -187,7 +235,7 @@ namespace SplunkXamarinClient
 
 		async void ModernHttpClientRestPost (object sender, EventArgs e)
 		{
-			// Use SplunkInterceptionHttpHandler to intercept your networking REST calls
+			// Use MintHttpHandler to intercept your networking REST calls
 			MintHttpHandler interceptionHandler = new MintHttpHandler(new NativeMessageHandler());
 			HttpClient httpClient = new HttpClient (interceptionHandler);
 			HttpResponseMessage responseMessage = await httpClient.PostAsync(URLRequestBin, new StringContent("Just A Test"));
