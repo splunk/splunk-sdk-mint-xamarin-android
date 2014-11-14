@@ -5,8 +5,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SplunkMint.Xamarin.Android"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SplunkXamarinClient", "SplunkXamarinClient\SplunkXamarinClient.csproj", "{ED4309D1-12C6-4518-AC59-362F204DE55D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SplunkMint.XamarinExtensions.Android", "SplunkMint.XamarinExtensions.Android\SplunkMint.XamarinExtensions.Android.csproj", "{C16D9F2A-4800-4062-8DDD-DD9DB4087093}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{6C3B7576-0699-4E19-844B-B8FE6BF05800}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C3B7576-0699-4E19-844B-B8FE6BF05800}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C3B7576-0699-4E19-844B-B8FE6BF05800}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C16D9F2A-4800-4062-8DDD-DD9DB4087093}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C16D9F2A-4800-4062-8DDD-DD9DB4087093}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C16D9F2A-4800-4062-8DDD-DD9DB4087093}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C16D9F2A-4800-4062-8DDD-DD9DB4087093}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ED4309D1-12C6-4518-AC59-362F204DE55D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ED4309D1-12C6-4518-AC59-362F204DE55D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED4309D1-12C6-4518-AC59-362F204DE55D}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -38,11 +38,14 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
+    <Reference Include="System.Net.Http" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Additions\Fixups.cs" />
     <Compile Include="Additions\Extensions.cs" />
+    <Compile Include="Additions\MintHttpHandler.cs" />
+    <Compile Include="Additions\XamarinExceptionHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Additions\AboutAdditions.txt" />

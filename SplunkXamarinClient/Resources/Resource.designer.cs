@@ -27,7 +27,6 @@ namespace SplunkXamarinClient
 		public static void UpdateIdValues()
 		{
 			global::ModernHttpClient.Resource.String.library_name = global::SplunkXamarinClient.Resource.String.library_name;
-			global::SplunkMint.XamarinExtensions.Android.Resource.String.library_name = global::SplunkXamarinClient.Resource.String.library_name;
 		}
 		
 		public partial class Attribute

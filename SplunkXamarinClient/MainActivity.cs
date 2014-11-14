@@ -9,7 +9,6 @@ using Android.OS;
 using Splunk.Mint;
 using Android.Util;
 using System.Net.Http;
-using SplunkMint.XamarinExtensions.Android;
 using System.Net.Http.Headers;
 using ModernHttpClient;
 using System.Net;
@@ -48,7 +47,11 @@ namespace SplunkXamarinClient
 			// all log messages with tag "MyApp", with priority "Debug" or above:
 			Mint.SetLogging(400, "ActivityManager:I MyApp:D *:S");
 
-			MintXamarin.InitAndStartXamarinSession(Application.Context, "3520f5c9");
+			Mint.LastBreath = () => {
+				Log.Debug(Tag, "Last Breath invoked!");
+			};
+
+			Mint.InitAndStartXamarinSession(Application.Context, "3520f5c9");
 
 			Mint.AddExtraData ("ExtraKey1", "ExtraValue1");
 

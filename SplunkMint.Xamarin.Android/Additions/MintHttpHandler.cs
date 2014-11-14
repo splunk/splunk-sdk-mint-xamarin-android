@@ -2,11 +2,9 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Threading;
-using Splunk.Mint;
-using System.Diagnostics;
 using Splunk.Mint.Network;
 
-namespace SplunkMint.XamarinExtensions.Android
+namespace Splunk.Mint
 {
 	#region Splunk Network Xamarin Android Interception HTTP Delegating Handler
 
@@ -27,7 +25,7 @@ namespace SplunkMint.XamarinExtensions.Android
 		protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
 		{
 			byte[] contentBytes = await request.Content.ReadAsByteArrayAsync();
-			long startTime = Extensions.GetCurrentUnixTimestampMillis ();
+			long startTime = DateTimeExtensions.GetCurrentUnixTimestampMillis ();
 			string exceptionCaughtMessage = null;
 			HttpResponseMessage responseMessage = null;
 
@@ -39,7 +37,7 @@ namespace SplunkMint.XamarinExtensions.Android
 				exceptionCaughtMessage = ex.Message;
 			}
 
-			long endTime = Extensions.GetCurrentUnixTimestampMillis (); 
+			long endTime = DateTimeExtensions.GetCurrentUnixTimestampMillis (); 
 			byte[] receivedBytes = await responseMessage.Content.ReadAsByteArrayAsync();
 
 			await SaveNetworkActionAsync (request.RequestUri.ToString(), request.RequestUri.Scheme, startTime, endTime, (int)responseMessage.StatusCode,
