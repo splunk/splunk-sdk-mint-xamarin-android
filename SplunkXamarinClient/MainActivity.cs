@@ -30,7 +30,10 @@ namespace SplunkXamarinClient
 			Mint.EnableDebug ();
 			Mint.SetUserIdentifier ("gtaskos@splunk.com");
 //			Mint.DisableNetworkMonitoring ();
-			Mint.AddURLToBlackList("www.facebook.com");
+//			Mint.AddURLToBlackList("requestb.in");
+
+			IList<string> blacklist = Mint.URLBlackList;
+
 			Mint.EnableLogging(true);
 
 			// Log the last 100 messages

@@ -58,6 +58,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Xamarin.Android.Bindings.targets" />
   <ItemGroup>
-    <EmbeddedJar Include="Jars\splunk-mint-4.0.4.jar" />
+    <EmbeddedJar Include="Jars\splunk-mint-4.0.6.jar" />
   </ItemGroup>
 </Project>
