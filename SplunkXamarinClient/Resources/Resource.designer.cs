@@ -109,6 +109,9 @@ namespace SplunkXamarinClient
 			// aapt resource value: 0x7f050005
 			public const int stopTransactionButton = 2131034117;
 			
+			// aapt resource value: 0x7f050010
+			public const int unobservedTaskButton = 2131034128;
+			
 			static Id()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();

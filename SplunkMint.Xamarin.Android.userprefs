@@ -1,10 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.LGV5009f94ecad" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="SplunkXamarinClient/MainActivity.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="SplunkMint.Xamarin.Android/Additions/XamarinExceptionHandler.cs">
     <Files>
-      <File FileName="SplunkXamarinClient/MainActivity.cs" Line="13" Column="13" />
-      <File FileName="SplunkMint.Xamarin.Android/Additions/MintHttpHandler.cs" Line="12" Column="12" />
-      <File FileName="SplunkMint.Xamarin.Android/Additions/XamarinExceptionHandler.cs" Line="53" Column="53" />
+      <File FileName="SplunkXamarinClient/MainActivity.cs" Line="45" Column="45" />
+      <File FileName="SplunkMint.Xamarin.Android/Additions/XamarinExceptionHandler.cs" Line="6" Column="6" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

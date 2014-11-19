@@ -13,6 +13,7 @@ using System.Net.Http.Headers;
 using ModernHttpClient;
 using System.Net;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace SplunkXamarinClient
 {
@@ -88,7 +89,8 @@ namespace SplunkXamarinClient
 			Button cancelTransactionButton = FindViewById<Button> (Resource.Id.cancelTransactionButton);
 			Button httpClientButton = FindViewById<Button> (Resource.Id.httpClientButton);
 			Button modernHttpClientButton = FindViewById<Button> (Resource.Id.modernHttpClientButton);
-			
+			Button unobservedTaskButton = FindViewById<Button> (Resource.Id.unobservedTaskButton);
+
 			nullReferenceButton.Click += NullReferenceClick;
 			flushButton.Click += FlushClick;
 			logEventLogLevelButton.Click += LogEventLogLevelClick;
@@ -100,6 +102,11 @@ namespace SplunkXamarinClient
 			cancelTransactionButton.Click += TransactionCancelClick;
 			httpClientButton.Click += HttpClientRestPost;
 			modernHttpClientButton.Click += ModernHttpClientRestPost;
+			unobservedTaskButton.Click += TaskUnawaitedMethod;
+
+			Mint.HandleUnobservedException = (Exception arg) => {
+				return true;
+			};
 		}
 
 		protected override void OnResume ()
@@ -112,6 +119,16 @@ namespace SplunkXamarinClient
 		{
 			base.OnStop ();
 			Mint.CloseSession (this);
+		}
+
+		void TaskUnawaitedMethod (object sender, EventArgs args)
+		{
+			Task.Run(async () =>  await CrashUnawaitedTaskMethod ());
+		}
+
+		private async Task CrashUnawaitedTaskMethod ()
+		{
+			throw new Exception ("Task Unawaited");
 		}
 
 		void HandleNullReferenceClick(object sender, EventArgs args)
