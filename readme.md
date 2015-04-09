@@ -64,7 +64,7 @@ To install the Splunk MINT NuGet package by using the Package Manager Console, d
 2. On the **Tools** menu, point to **Library Package Manager**, and then click **Package Manager Console**.
 3. In the **Package Manager Console** at the **PM>** prompt, type the following:
    
-       Install-Package SplunkMint.Xamarin.Android
+    Install-Package SplunkMint.Xamarin.Android
 
 To install the Splunk MINT SDK by using the Package Manager window in Visual Studio:
 
@@ -92,20 +92,21 @@ To use the SDK:
 
 1. In the class that will use Splunk MINT, add the following `using` statement:
 
-       using SplunkMint;
+    `using SplunkMint;`
 
 2. To add Splunk MINT to your project, you need just one line of code with your API key:
 
-       protected override void OnCreate (Bundle bundle)
-       {
-           base.OnCreate (bundle);
+    ```
+    protected override void OnCreate (Bundle bundle)
+    {
+        base.OnCreate (bundle);
        
-           // Code...
-           Mint.InitAndStartXamarinSession(Application.Context, "API_KEY");
+        // Code...
+        Mint.InitAndStartXamarinSession(Application.Context, "API_KEY");
 
-           // Code...
-       }
-
+        // Code...
+    }
+    ```
 One line of code―that's it!
 
 The **InitAndStartXamarinSession(Application.Context,** "API_KEY"**)** method installs the Splunk exception handlers for Xamarin uncaught exceptions and the performance monitor, sends all the saved data and performance metrics to Splunk MINT, and starts a new session for your activity.
@@ -114,8 +115,9 @@ A few more details are necessary though:
 
 * If you haven't already given your app permission to access the Internet, you need to so that your app can send crash reports and performance metrics to Splunk MINT. Add the following line to your app **AndroidManifest.xml** file in the **Source** tab or use the checkboxes on the **Application** tab to give permission to access the internet and network state:
 
-       <uses-permission android:name="android.permission.INTERNET" />
-       <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    `<uses-permission android:name="android.permission.INTERNET" />`
+    
+    `<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />`
        
 * To have a better experience with the Splunk MINT dashboards, use numeric versioning schemes, preferably in MAJOR.MINOR.RELEASE format.
 
@@ -125,18 +127,20 @@ To verify that the Splunk MINT SDK is correctly integrated into your Xamarin And
 
 1. Use the following code to intentionally crash your app by causing a **nullPointer** exception:
 
-       void NullReferenceClick(object sender, EventArgs args)
-       {
-           string a = null;
-           a.ToString();
-       }
-
+    ```
+    void NullReferenceClick(object sender, EventArgs args)
+    {
+        string a = null;
+        a.ToString();
+    }
+    ```
+    
     Allow some time (usually less than five minutes) for the error instance to appear on your dashboard. If your Splunk MINT Management Console dashboard indicates that your app has crashed, you know your app has successfully integrated Splunk MINT. Further, Splunk MINT generates an email message to inform you about exactly what went wrong.
 
 2. Crash your app again to see the error counter on your dashboard increase.
 3. To see Splunk MINT logs in your logcat console, enable debug mode by adding the following line before the **InitAndStartXamarinSession** method:
 
-       Mint.EnableDebug ();
+    `Mint.EnableDebug ();`
     
 4. To investigate the cause of the error, go to the Errors page on your Splunk MINT Management Console dashboard. Click the error to examine the information Splunk MINT collects, and examine the error's stack trace to identify the exact lines of code that caused the problem.
 
@@ -148,17 +152,17 @@ Use the following methods to start, close, and flush sessions:
 
 * To explicitly start the session, use the **StartSession(***Context***)** method at the **onStart** method of your activity:
 
-       Mint.StartSession (this);
+    `Mint.StartSession (this);`
 
     **Note**  If a session is opened before one minute has passed, this method does not open a new session.
 
 * To close the active session, use the **CloseSession(***Context***)** method:
 
-       Mint.CloseSession(this);
+    `Mint.CloseSession(this);`
        
 * To manually flush all saved data, use the **Flush()** method:
 
-       Mint.Flush();
+    `Mint.Flush();`
 
 **Example code: Start session**
 
@@ -276,15 +280,15 @@ Use the following methods to work with transactions:
 
 * To start a transaction, use the **transactionStart(***string***)** method as follows:
 
-       Mint.TransactionStart("Test1");
+    `Mint.TransactionStart("Test1");`
 
 * To stop a transaction, use the **transactionStop(***string***)** method as follows:
 
-       Mint.TransactionStop("Test1");
+    `Mint.TransactionStop("Test1");`
 
 * To cancel a transaction, use the **transactionCancel(***string, string***)** method as follows:
 
-       Mint.TransactionCancel("Test1", "This is the reason");
+    `Mint.TransactionCancel("Test1", "This is the reason");`
 
 To identify slow transactions that negatively affect the user experience, monitor how long transactions take to complete by going to the Transactions dashboard in Splunk MINT Management Console.
 
@@ -294,11 +298,11 @@ In addition to reporting the sequence of events leading up to an app crash, Splu
 
 * To report an event, use the **LogEvent(***string***)** method as follows:
 
-       Mint.LogEvent("Button1 pressed");
+    `Mint.LogEvent("Button1 pressed");`
 
 * To report an event with the log level, use the **LogEvent(***string*, **MintLogLevel)** method as follows:
 
-       Mint.LogEvent("Button1 pressed", MintLogLevel.Info);
+    `Mint.LogEvent("Button1 pressed", MintLogLevel.Info);`
 
 Add as many events as you like to track virtually any user activity on your app. To view the event data, see the Events dashboard in Splunk MINT Management Console.
 
@@ -308,60 +312,64 @@ At times, you might expect your app to throws exceptions. When you handle those 
 
 * To log an exception, use the **LogException(Java.Lang.Exception)** method as follows:
 
-       
-       void HandleNullReferenceClick(object sender, EventArgs args)
-       {
-           try
-           {
-               string a = null;
-               a.ToString();
-           }
-           catch (Exception ex) {
-               // Since you are catching a System.Exception type you will need
-               // to convert it to a Java.Lang.Exception type.
-               // We provide you a convenient exception method ToJavaException().
-               Mint.LogException (ex.ToJavaException());
-           }
-       }
-
+    ```
+    void HandleNullReferenceClick(object sender, EventArgs args)
+    {
+        try
+        {
+            string a = null;
+            a.ToString();
+        }
+        catch (Exception ex) {
+            // Since you are catching a System.Exception type you will need
+            // to convert it to a Java.Lang.Exception type.
+            // We provide you a convenient exception method ToJavaException().
+            Mint.LogException (ex.ToJavaException());
+        }
+    }
+    ```
+    
 * To add more information to the log, use the **LogExceptionMessage(***string*, *string*, **Java.Lang.Exception)** method as follows:
 
-       Mint.LogExceptionMessage ("HandledKey1", "HandledValue1", ex.ToJavaException());
+    `Mint.LogExceptionMessage ("HandledKey1", "HandledValue1", ex.ToJavaException());`
        
 * To specify multiple key-value pairs as a HashMap, use the **LogExceptionMap(***customdata*, *exception***)** method as follows:
 
-       IDictionary<string, string> dictionaryMap = new Dictionary<string, string> ();
-       dictionaryMap.Add ("DictionaryKey1", "DictionaryValue1");
-       dictionaryMap.Add ("DictionaryKey2", "DictionaryValue2");
-       Mint.LogExceptionMap (dictionaryMap, ex.ToJavaException());
-
+    ```
+    IDictionary<string, string> dictionaryMap = new Dictionary<string, string> ();
+    dictionaryMap.Add ("DictionaryKey1", "DictionaryValue1");
+    dictionaryMap.Add ("DictionaryKey2", "DictionaryValue2");
+    Mint.LogExceptionMap (dictionaryMap, ex.ToJavaException());
+    ```
+    
 ## Add custom data to crash reports ##
 
 Although Splunk MINT collects plenty of data associated with each crash of your app, you can collect additional custom crash data. To add custom data to your crash reports, use the extra data map. The data values have a length limit of 128 characters.
 
 * To add key-value pairs to the extra data map, use the **AddExtraData(***string*, *string***)** method as follows:
 
-       Mint.AddExtraData ("ExtraKey1", "ExtraValue1");
+    `Mint.AddExtraData ("ExtraKey1", "ExtraValue1");`
 
 * To add the custom data as a HashMap, use the **AddExtraDataMap(IDictionary<***string*, *string***>)** method as follows:
 
-       IDictionarying, string> dictionaryMap = new Dictionary<string, string> ();
-       dictionaryMap.Add ("ExtraDictionaryKey1", "ExtraDictionaryValue1");
-       dictionaryMap.Add ("ExtraDictionaryKey2", "ExtraDictionaryValue2");
-       Mint.AddExtraDataMap (dictionaryMap);
-
+    ```
+    IDictionarying, string> dictionaryMap = new Dictionary<string, string> ();
+    dictionaryMap.Add ("ExtraDictionaryKey1", "ExtraDictionaryValue1");
+    dictionaryMap.Add ("ExtraDictionaryKey2", "ExtraDictionaryValue2");
+    Mint.AddExtraDataMap (dictionaryMap);
+    ```
+    
 * Get the extra data map by using the **ExtraData** property.
 
-       IDictionary<string, string> globalExtras = Mint.ExtraData;
+    `IDictionary<string, string> globalExtras = Mint.ExtraData;`
 
 * To remove a specific value from the extra data, use the **RemoveExtraData(***string***)** method as follows:
 
-       Mint.RemoveExtraData("Key");
+    `Mint.RemoveExtraData("Key");`
        
 * To clear the extra data completely, use the **ClearExtraData()** method as follows:
 
-       Mint.ClearExtraData();
-
+    `Mint.ClearExtraData();`
 
 To view the custom crash data in Splunk MINT Management Console:
 
@@ -375,8 +383,8 @@ To help investigate the cause of a crash, you can have Splunk MINT report the fl
 
 * Use the **LeaveBreadcrumb(***string***)** method at the points of interest in your code as follows:
 
-       Mint.LeaveBreadcrumb("keyPressed");
-       Mint.LeaveBreadcrumb("loginDone");
+    `Mint.LeaveBreadcrumb("keyPressed");`
+    `Mint.LeaveBreadcrumb("loginDone");`
 
 ## Use the crash callback ##
 
@@ -491,7 +499,7 @@ With Splunk MINT, you can closely track the experience of any given user, for ex
 
 * Use the **SetUserIdentifier(***string***)** method to set a user identifier as follows:
 
-       Mint.SetUserIdentifier ("someone@mint.splunk.com");
+    `Mint.SetUserIdentifier ("someone@mint.splunk.com");`
 
 Then, to search errors for a specific user name or ID, go to the Errors dashboard in Splunk MINT Management Console, then enter the user name or ID under **Search by username** in the list of filters.
 
@@ -503,11 +511,11 @@ Normally, Splunk MINT monitors all network calls. You can disable network monito
 
 * To disable network monitoring entirely, use the **DisableNetworkMonitoring()** method before the **InitAndStartXamarinSession(***Context, string***)** method as follows:
 
-       Mint.DisableNetworkMonitoring ();
+    `Mint.DisableNetworkMonitoring ();`
        
 * To add a URL to the network monitoring blacklist, use the **AddURLToBlackList(***string***)** method before the **InitAndStartXamarinSession(***Context, string***)** method as follows:
 
-       Mint.AddURLToBlackList("www.facebook.com");
+    `Mint.AddURLToBlackList("www.facebook.com");`
 
 ## Report LogCat output ##
 
@@ -517,7 +525,7 @@ LogCat is the Android logging system that lets you collect and view system debug
 
 1. To send LogCat output with your exceptions, add the following line to your app's **AndroidManifest.xml** file on the **Source** tab or select the corresponding checkboxes on the **Application** tab:
 
-       <uses-permission android:name="android.permission.READ_LOGS" />
+    `<uses-permission android:name="android.permission.READ_LOGS" />`
 
     Splunk MINT uses this permission to read the LogCat output.
 
@@ -525,7 +533,8 @@ LogCat is the Android logging system that lets you collect and view system debug
 
 2. To enable LogCat logging, use the **enableLogging** method as follows:
 
-       Mint.EnableLogging(true);
+    `Mint.EnableLogging(true);`
+       
 3. Optionally, to restrict the number of lines or to set a filter string for log output, use the **SetLogging **method with additional parameters:
 
     * **SetLogging(***lines***)**
@@ -534,19 +543,21 @@ LogCat is the Android logging system that lets you collect and view system debug
 
 The following code shows examples of using the **SetLogging** method with different filter expressions:
 
-       // Log the last 100 messages
-       Mint.SetLogging(100);
+```
+// Log the last 100 messages
+Mint.SetLogging(100);
 
-       // Log all messages with priority level "warning" and higher, on all tags
-       Mint.SetLogging("*:W");
+// Log all messages with priority level "warning" and higher, on all tags
+Mint.SetLogging("*:W");
 
-       // Log the latest 100 messages with priority level "warning" and higher,
-       // on all tags
-       Mint.SetLogging(100, "*:W");
+// Log the latest 100 messages with priority level "warning" and higher,
+// on all tags
+Mint.SetLogging(100, "*:W");
 
-       // Log all messages from the ActivityManager at priority "Info" or above,
-       // all log messages with tag "MyApp", with priority "Debug" or above:
-       Mint.SetLogging(400, "ActivityManager:I MyApp:D *:S");
+// Log all messages from the ActivityManager at priority "Info" or above,
+// all log messages with tag "MyApp", with priority "Debug" or above:
+Mint.SetLogging(400, "ActivityManager:I MyApp:D *:S");
+```
 
 By default, Splunk MINT sends the last 5,000 lines with no filter. Splunk MINT filtering uses the same filtering mechanism as LogCat. For more information about filter expressions, see [Filtering Log Output](http://developer.android.com/tools/debugging/debugging-log.html#filteringOutput) on the Android Developers website.
 
@@ -562,5 +573,5 @@ You can display debug messages during testing to examine application errors and 
 
 * To display debug messages, use the **EnableDebug()** method as follows:
 
-       Mint.EnableDebug();
+    `Mint.EnableDebug();`
 
