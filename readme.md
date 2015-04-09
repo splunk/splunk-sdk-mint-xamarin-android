@@ -198,7 +198,7 @@ public class MainActivity : Activity
 
 **Example code: Custom exit method**
 
-Let's say you have implemented your own exit method using a button in your **AndroidManifest.xml ** layout file or using a dialog box that intercepts the <tt>onback</tt> key event. The modified code below explicitly defines an exit method as the indicator that a session has ended. In this case, the user explicitly exited the application.
+Let's say you have implemented your own exit method using a button in your **AndroidManifest.xml** layout file or using a dialog box that intercepts the <tt>onback</tt> key event. The modified code below explicitly defines an exit method as the indicator that a session has ended. In this case, the user explicitly exited the application.
 
 ```
 [Activity (Label = "SplunkXamarinClient", MainLauncher = true, Icon = "@drawable/icon")]
@@ -535,7 +535,7 @@ LogCat is the Android logging system that lets you collect and view system debug
 
     `Mint.EnableLogging(true);`
        
-3. Optionally, to restrict the number of lines or to set a filter string for log output, use the **SetLogging **method with additional parameters:
+3. Optionally, to restrict the number of lines or to set a filter string for log output, use the **SetLogging** method with additional parameters:
 
     * **SetLogging(***lines***)**
     * **SetLogging(***filter***)**
