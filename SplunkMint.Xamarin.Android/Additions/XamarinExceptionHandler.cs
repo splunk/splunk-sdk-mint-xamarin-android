@@ -36,7 +36,7 @@ namespace Splunk.Mint
 
 		public static void InitAndStartXamarinSession(Android.Content.Context context, string apiKey)
 		{
-			Mint.AddExtraData ("XamarinSDKVersion", "4.0.2");
+			Mint.AddExtraData ("XamarinSDKVersion", "4.4.0");
 			XamarinExceptionHandler.InitXamarinExceptionHandler ();
 			Mint.InitAndStartSession (context, apiKey);
 		}

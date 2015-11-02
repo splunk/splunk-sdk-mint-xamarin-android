@@ -21,6 +21,7 @@ using System.Threading;
 using Splunk.Mint.Network;
 using System.Collections.Generic;
 using System.Linq;
+using Object = Java.Lang.Object;
 
 namespace Splunk.Mint
 {
@@ -51,20 +52,21 @@ namespace Splunk.Mint
 				byte[] contentBytes = await request.Content.ReadAsByteArrayAsync();
 				long startTime = DateTimeExtensions.GetCurrentUnixTimestampMillis ();
 				string exceptionCaughtMessage = null;
+				byte[] receivedBytes = null;
 
 				try
 				{
 					responseMessage = await base.SendAsync(request, cancellationToken);
+				    receivedBytes = await responseMessage.Content.ReadAsByteArrayAsync();
 				}
 				catch (Exception ex) {
 					exceptionCaughtMessage = ex.Message;
 				}
 
-				long endTime = DateTimeExtensions.GetCurrentUnixTimestampMillis (); 
-				byte[] receivedBytes = await responseMessage.Content.ReadAsByteArrayAsync();
+				long endTime = DateTimeExtensions.GetCurrentUnixTimestampMillis ();
 
-				await SaveNetworkActionAsync (url, request.RequestUri.Scheme, startTime, endTime, (int)responseMessage.StatusCode,
-					contentBytes.Length, receivedBytes.Length, exceptionCaughtMessage);
+			    await SaveNetworkActionAsync (url, request.RequestUri.Scheme, startTime, endTime, (int)(responseMessage?.StatusCode ?? 0),
+					contentBytes.Length, receivedBytes?.Length ?? 0, exceptionCaughtMessage, Mint.ExtraData.ToJavaDictionary());
 			} else {
 				responseMessage = await base.SendAsync (request, cancellationToken);
 			}
@@ -73,12 +75,12 @@ namespace Splunk.Mint
 		}
 
 		private async Task SaveNetworkActionAsync(string url, string protocol, long startTime, long endTime, 
-			int statusCode, long requestLength, long responseLength, string exception)
+			int statusCode, long requestLength, long responseLength, string exception, IDictionary<string, Java.Lang.Object> extras)
 		{
 			await Task.Run(() =>
 				{
 					NetLogManager.Instance.LogNetworkRequest (url, protocol, startTime, endTime, 
-						statusCode, requestLength, responseLength, exception);
+						statusCode, requestLength, responseLength, exception, extras);
 				});
 		}
 	}

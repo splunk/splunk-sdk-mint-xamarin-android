@@ -142,7 +142,7 @@ namespace SplunkXamarinClient
 			Task.Run(async () =>  await CrashUnawaitedTaskMethod ());
 		}
 
-		private async Task CrashUnawaitedTaskMethod ()
+		private Task CrashUnawaitedTaskMethod ()
 		{
 			throw new Exception ("Task Unawaited");
 		}

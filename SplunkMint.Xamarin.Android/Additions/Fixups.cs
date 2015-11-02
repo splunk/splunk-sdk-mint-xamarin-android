@@ -15,6 +15,44 @@
 */
 
 using System;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
+
+namespace Splunk.Mint
+{
+    public partial class Mint
+    {
+        static Mint()
+        {
+            URLBlackList = new List<string>();    
+        }
+
+        public static IList<string> URLBlackList { get; private set; }
+
+        public static void AddURLToBlackList(string url)
+        {
+            if (!URLBlackList.Contains(url)) {
+                URLBlackList.Add(url);
+            }
+            Mint.AddURLToBlackListInternal(url);
+        }
+
+        public static void LogExceptionMap (IDictionary<string, string> map, Exception exception)
+        {
+            LogExceptionMapInternal(map.ToJavaDictionary(), exception.ToJavaException());
+        }
+
+        public static void AddExtraDataMap(IDictionary<string, string> extraData)
+        {
+            AddExtraDataMapInternal(extraData.ToJavaDictionary());
+        }
+
+        public static IDictionary<string, string> ExtraData
+        {
+            get { return Mint.ExtraDataInternal().FromJavaDictionary(); }
+        }
+    }
+}
 
 namespace Splunk.Mint.Network 
 {
