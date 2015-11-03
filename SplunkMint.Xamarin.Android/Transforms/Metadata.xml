@@ -33,7 +33,14 @@
   <attr path="/api/package[@name='com.splunk.mint.network']/class[@name='Timer']/method[@name='getValue' and count(parameter)=0]"
     name="visibility">protected</attr>
  
- 
+  <attr path="/api/package[@name='com.splunk.mint']/class[@name='Mint']/method[@name='logExceptionMap']" name="visibility">private</attr>
+  <attr path="/api/package[@name='com.splunk.mint']/class[@name='Mint']/method[@name='logExceptionMap']" name="managedName">LogExceptionMapInternal</attr>
+  <attr path="/api/package[@name='com.splunk.mint']/class[@name='Mint']/method[@name='addExtraDataMap']" name="visibility">private</attr>
+  <attr path="/api/package[@name='com.splunk.mint']/class[@name='Mint']/method[@name='addExtraDataMap']" name="managedName">AddExtraDataMapInternal</attr>
+  <attr path="/api/package[@name='com.splunk.mint']/class[@name='Mint']/method[@name='getExtraData' and count(parameter)=0]" name="visibility">private</attr>
+  <attr path="/api/package[@name='com.splunk.mint']/class[@name='Mint']/method[@name='getExtraData' and count(parameter)=0]" name="managedName">ExtraDataInternal</attr>
+  <attr path="/api/package[@name='com.splunk.mint']/class[@name='Mint']/method[@name='addURLToBlackList' and count(parameter)=1 and parameter[1][@type='java.lang.String']]" name="visibility">private</attr>
+  <attr path="/api/package[@name='com.splunk.mint']/class[@name='Mint']/method[@name='addURLToBlackList' and count(parameter)=1 and parameter[1][@type='java.lang.String']]" name="managedName">AddURLToBlackListInternal</attr>
  
   <attr path="/api/package[@name='com.splunk.mint']" name="managedName">Splunk.Mint</attr>
   <attr path="/api/package[@name='com.splunk.mint.network']" name="managedName">Splunk.Mint.Network</attr>

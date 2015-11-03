@@ -15,7 +15,10 @@
 */
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Android.Util;
+using Object = Java.Lang.Object;
 
 namespace Splunk.Mint
 {
@@ -27,6 +30,20 @@ namespace Splunk.Mint
 
 			return javaException;
 		}
+
+	    public static IDictionary<string, Java.Lang.Object> ToJavaDictionary(this IDictionary<string, string> dictionary)
+	    {
+	        return dictionary != null
+	                   ? dictionary.ToDictionary(pair => pair.Key, pair => (Java.Lang.Object) pair.Value)
+	                   : null;
+	    }
+
+	    public static IDictionary<string, string> FromJavaDictionary(this IDictionary<string, Java.Lang.Object> javaDictionary)
+	    {
+	        return javaDictionary != null
+	                   ? javaDictionary.ToDictionary(pair => pair.Key, pair => (string) pair.Value)
+	                   : null;
+	    }
 	}
 
 	internal static class DateTimeExtensions
